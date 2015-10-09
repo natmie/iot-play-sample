@@ -1,6 +1,7 @@
 <div ng-include="'app/components/play/lead/leadView.html'"></div>
 <div class="background-box"></div>
 <div class="action-pane">
+	<div class="container">
 	<div class="main">
 		<div class="row">
 			<div class="col-xs-12">
@@ -35,7 +36,7 @@
 											<input type="password" pattern="\d*" maxlength="1" name="passwordInput3" class="char-input" ng-model="passwordInput3">
 											<input type="password" pattern="\d*" id="last-char-input" maxlength="1" name="passwordInput4" class="char-input" ng-model="passwordInput4">
 										</div>
-										<div><small>Enter a 4 digit numeric code that will act as a key for your smartphone.</small></div>
+										<div><small>Enter a new 4-digit code that will be the key for the demo web-app running on your smartphone.</small></div>
 									</div>
 									<div class="form-set">
 										<h4>Email address</h4>
@@ -71,16 +72,34 @@
 	</div>
 </div>
 
-<div class="directive-footer" ng-include="'app/components/play/footer/footerView.html'"></div>
+</div>
+
+<div ng-include="'app/components/play/footer/footerView.html'"></div>
+
+<!--
+<div class="next-tab-container panel panel-default">
+	<div class="panel-heading panel-play">
+		<div class="container">
+			<div class="col-xs-12 col-sm-8 left-text-play">
+				<span>Now that you have seen the value with your own device, why not take things to the next level and create your own app with a free Bluemix trial?</span>
+			</div>
+			<div class="col-xs-12 col-sm-3 right-button-link">
+				<a ui-sref="try.deploy" class="next-tab-link">Try now</a>
+			</div>
+		</div>
+	</div>
+</div> -->
 
 <script>
 	$(".char-input").on("click", function () {
 	   	$(this).select();
+			$(this).get(0).selectionStart=0;
+	    $(this).get(0).selectionEnd=999;
 	});
 	var valueChanged = 0;
 	$(".char-input").keydown(function (e) {
 		if (!((e.keyCode == 190) || (e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode == 8 || e.keyCode == 9 || e.keyCode == 37 || e.keyCode == 39 || e.keyCode == 46)) {
-      event.preventDefault();
+      e.preventDefault();
 			valueChanged = 0;
     }
 		else{
@@ -91,6 +110,8 @@
 		var code = e.which;
 		if(code != 9 && valueChanged == 1) {
 		  $(this).select();
+			$(this).get(0).selectionStart=0;
+	    $(this).get(0).selectionEnd=999;
 		   if (this.value.length == this.maxLength) {
 		     var $next = $(this).next('.char-input');
 		     if ($next.length)

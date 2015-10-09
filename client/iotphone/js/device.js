@@ -13,8 +13,6 @@
  * Contributors:
  *   Bryan Boyd - Initial implementation
  *******************************************************************************/
-'use strict';
-
 (function(window) {
   var ax = 0,
     ay = 0,
@@ -99,7 +97,7 @@
       } catch (err) {
         console.error(err);
         isConnected = false;
-        changeConnectionStatusImage("/images/disconnected.svg");
+        changeConnectionStatusImage("images/disconnected.svg");
         document.getElementById("connection").innerHTML = "Disconnected";
         setTimeout(connectDevice(client), 1000);
       }
@@ -110,7 +108,7 @@
     // The device connected successfully
     console.log("Connected Successfully!");
     isConnected = true;
-    changeConnectionStatusImage("/images/connected.svg");
+    changeConnectionStatusImage("images/connected.svg");
     document.getElementById("connection").innerHTML = "Connected";
   }
 
@@ -121,7 +119,7 @@
   }
 
   function connectDevice(client) {
-    changeConnectionStatusImage("/images/connecting.svg");
+    changeConnectionStatusImage("images/connecting.svg");
     document.getElementById("connection").innerHTML = "Connecting";
     console.log("Connecting device to IoT Foundation...");
     client.connect({

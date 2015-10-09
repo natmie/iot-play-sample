@@ -4,7 +4,7 @@ module.exports = function($resource) {
 
   var client = null;
 
-  this.connect = function(deviceId, callback) {
+  this.getCredentials = function(callback) {
 
     var iotService = $resource('/iot/credentials', null, {
       'getCredentials': {
@@ -14,6 +14,18 @@ module.exports = function($resource) {
     });
 
     iotService.getCredentials(null,
+      function(data) {
+        callback(data);
+      },
+      function(error) {
+        console.log(error);
+      });
+
+  };
+
+  this.connect = function(deviceId, callback) {
+
+    this.getCredentials(
       function(data) {
         var mqtt = require('mqtt');
 
@@ -38,9 +50,6 @@ module.exports = function($resource) {
           }
           callback(message);
         });
-      },
-      function(error) {
-        console.log(error);
       });
   };
 

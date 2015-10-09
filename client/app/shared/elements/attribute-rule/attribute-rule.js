@@ -5,13 +5,13 @@
 Polymer({
 	is: 'attribute-rule',
 	properties: {
-		updateAttributeLimit: {
-			type: Number,
-			value: 10
-		},
-		attribute: {
+		attributeName: {
 			type: String,
-			value: "vibration"
+			value: "value"
+		},
+		attributeUnit: {
+			type: String,
+			value: ""
 		},
 		payloadAttribute: {
 			type: Number,
@@ -20,8 +20,7 @@ Polymer({
 		},
 		attributeLimit: {
 			type: Number,
-			value: 10,
-			observer: '_observeAttributeLimit'
+			value: 10
 		},
 		payload: {
 			type: Object,
@@ -34,7 +33,8 @@ Polymer({
 			type: Array,
 			value: function() {
 				return [];
-			}
+			},
+			observer: '_observeMetadata'
 		},
 		triggerWarning: {
 			type: Boolean,
@@ -42,14 +42,15 @@ Polymer({
 			notify: true
 		}
 	},
-	_observeAttributeLimit: function() {
-		if(this.updateAttributeLimit !== this.attributeLimit) {
-			this.updateAttributeLimit = this.attributeLimit;
+	_observeMetadata: function(newValue) {
+		if (newValue) {
+			this.attributeName = this.metadata.shortName ? this.metadata.shortName : this.metadata.name;
+			this.attributeUnit = this.metadata.unit;
 		}
 	},
 	_observePayload: function(newValue) {
 		if (newValue && this.metadata) {
-			this.payloadAttribute = newValue[this.metadata[0].field];
+			this.payloadAttribute = newValue[this.metadata.field];
 		}
 	},
 	_observeVibration: function(newValue) {
@@ -57,21 +58,20 @@ Polymer({
 			this.triggerWarning = this.payloadAttribute > this.attributeLimit;
 		}
 	},
-	updateRule: function(){
-		this.attributeLimit = this.updateAttributeLimit;
+	_handleTapMinus: function() {
+		this.attributeLimit-=1;
+		if (this.attributeLimit < 0){
+			this.attributeLimit = 0;
+		}
 		// Fire an event to notify external code that the attribute limit has changed.
 		this.fire('attribute-limit-updated', {attributeLimit: this.attributeLimit});
 	},
-	_handleTapMinus: function() {
-		this.updateAttributeLimit-=1;
-		if (this.updateAttributeLimit < 0){
-			this.updateAttributeLimit = 0;
-		}
-	},
 	_handleTapSum: function() {
-		if (!this.updateAttributeLimit){
-			this.updateAttributeLimit = 0;
+		if (!this.attributeLimit){
+			this.attributeLimit = 0;
 		}
-		this.updateAttributeLimit = parseInt(this.updateAttributeLimit) + 1;
+		this.attributeLimit = parseInt(this.attributeLimit) + 1;
+		// Fire an event to notify external code that the attribute limit has changed.
+		this.fire('attribute-limit-updated', {attributeLimit: this.attributeLimit});
 	}
 });

@@ -43,11 +43,16 @@ module.exports = function($scope, LivePhoneDataService, $timeout, PlayService, S
 	$scope.gotoLabel = 'Visit this URL on your smartphone to see live data: ';
 	setMobileUrl(deviceId);
 
-	$scope.vibrationMetaData = [{
+	$scope.vibrationChartMetaData = [{
 		field: "accelMag",
-		name: "Vibration"
+		name: "Total Acceleration",
+		shortName: "acceleration",
+		unit: "m/s\u00B2;"
 	}];
-	$scope.accelMetaData = [{
+
+	$scope.vibrationAttributeRuleMetadata = $scope.vibrationChartMetaData[0];
+
+	$scope.accelChartMetaData = [{
 		field: "ax",
 		name: "Accel X"
 	}, {

@@ -1,64 +1,86 @@
 <div ng-include="'app/components/play/lead/leadView.html'"></div>
 <div class="background-box"></div>
 <div class="action-pane">
-	<div class="main">
-		<div class="row">
-			<div class="col-xs-12">
-				<div id="start-play" class="panel panel-default">
-					<div class="panel-heading panel-play"><span class="step-number">1</span> <span>Select your device</span></div>
-					<div class="panel-body">
-						<h5>Select your device</h5>
-						<div class="row">
-							<div class="col-xs-12 col-sm-6">
-								<div class="selection-box" ng-click="selected = 'smartphone'" ng-class="selected === 'smartphone' ? 'selected' : ''">
-									<div ng-if="selected === 'smartphone'" class="selection-check"><object data="assets/img/play-icon-check-dark.svg" type="image/svg+xml" /></div>
-									<object data="assets/img/play-icon-phone.svg" type="image/svg+xml" />
-									<h5>Use my smartphone</h5>
-									<p>Load a web page on your smartphone to send live sensor data, from your phone, over the internet to the cloud-based IBM Internet of Things Foundation service.</p>
-								</div>
-							</div>
-							<div class="col-xs-12 col-sm-6">
-								<div class="selection-box" ng-click="selected = 'device'" ng-class="selected === 'device' ? 'selected' : ''">
-									<div ng-if="selected === 'device'" class="selection-check"><object data="assets/img/play-icon-check-dark.svg" type="image/svg+xml" /></div>
-									<object data="assets/img/play-icon-device.svg" type="image/svg+xml" />
-									<h5>Use my internet-connected device</h5>
-									<p>Configure your device, such as a Texas Instruments sensor tag, Raspberry Pi or Intel Edison module, to send live data over the internet to the cloud-based IBM Internet of Things Foundation service.</p>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-xs-6 col-sm-9 col-md-10">
-								<hr>
-							</div>
-							<div class="col-xs-6 col-sm-3 col-md-2">
-								<a ui-sref="play.device" class="btn btn-default next-button play" ng-if="selected === 'smartphone'">Next</a>
-								<a href="//quickstart.internetofthings.ibmcloud.com" class="btn btn-default next-button play" ng-if="selected === 'device'">Next</a>
-								<button class="btn btn-default next-button disabled" ng-if="selected !== 'smartphone' && selected !== 'device'">Next</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="panel panel-disabled">
-					<div class="panel-heading"><span class="step-number">2</span> <span>Enter your device information</span></div>
-					<div class="panel-body">
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="panel panel-disabled">
-					<div class="panel-heading"><span class="step-number">3</span> <span>View live data from your device</span></div>
-					<div class="panel-body">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="container">
+    <div class="main">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default" id="start-play">
+            <div class="panel-heading panel-play">
+              <span class="step-number">1</span>
+              <span>Select your device</span>
+            </div>
+            <div class="panel-body">
+              <h5>Select your device</h5>
+              <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                  <div class="selection-box" ng-class="selected === 'smartphone' ? 'selected' : ''" ng-click="selected = 'smartphone'">
+                    <div class="selection-check" ng-if="selected === 'smartphone'"><object data="assets/img/play-icon-check-dark.svg" type="image/svg+xml"/></div>
+                    <object data="assets/img/play-icon-phone.svg" type="image/svg+xml"/>
+                    <h5>Use my smartphone</h5>
+                    <p>Load a web page on your smartphone to send live sensor data, from your phone, over the internet to the cloud-based IBM Internet of Things Foundation service.</p>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                  <div class="selection-box" ng-class="selected === 'device' ? 'selected' : ''" ng-click="selected = 'device'">
+                    <div class="selection-check" ng-if="selected === 'device'"><object data="assets/img/play-icon-check-dark.svg" type="image/svg+xml"/></div>
+                    <object data="assets/img/play-icon-device.svg" type="image/svg+xml"/>
+                    <h5>Use my internet-connected device</h5>
+                    <p>Configure your device, such as a Texas Instruments sensor tag, Raspberry Pi or Intel Edison module, to send live data over the internet to the cloud-based IBM Internet of Things Foundation service.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6 col-sm-9 col-md-10">
+                  <hr>
+                </div>
+                <div class="col-xs-6 col-sm-3 col-md-2">
+                  <a class="btn btn-default next-button play" ng-if="selected === 'smartphone'" ui-sref="play.device">Next</a>
+                  <a class="btn btn-default next-button play" href="//quickstart.internetofthings.ibmcloud.com" ng-if="selected === 'device'">Next</a>
+                  <button class="btn btn-default next-button disabled" ng-if="selected !== 'smartphone' && selected !== 'device'">Next</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-disabled">
+            <div class="panel-heading">
+              <span class="step-number">2</span>
+              <span>Enter your device information</span>
+            </div>
+            <div class="panel-body"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-disabled">
+            <div class="panel-heading">
+              <span class="step-number">3</span>
+              <span>View live data from your device</span>
+            </div>
+            <div class="panel-body"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div class="directive-footer" ng-include="'app/components/play/footer/footerView.html'"></div>
+<div ng-include="'app/components/play/footer/footerView.html'"></div>
+<!-- 
+<div class="next-tab-container panel panel-default">
+  <div class="panel-heading panel-play">
+    <div class="container">
+      <div class="col-xs-12 col-sm-8 left-text-play">
+        <span>Now that you have seen the value with your own device, why not take things to the next level and create your own app with a free Bluemix trial?</span>
+      </div>
+      <div class="col-xs-12 col-sm-3 right-button-link">
+        <a class="next-tab-link" ui-sref="try.deploy">Try now</a>
+      </div>
+    </div>
+  </div>
+</div> -->
