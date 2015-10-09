@@ -2,7 +2,8 @@
 
 require('./../playService');
 
-module.exports = function($scope, $state, PlayService) {
+module.exports = function($scope, $http, $state, PlayService) {
+
 
   $scope.message = 'Give us some info about your device';
   $scope.nameLabel = 'Device name';
@@ -23,6 +24,16 @@ module.exports = function($scope, $state, PlayService) {
     $scope.passwordInput = $scope.passwordInput1 + $scope.passwordInput2 + $scope.passwordInput3 + $scope.passwordInput4;
     PlayService.setPassword($scope.passwordInput);
     PlayService.setEmail($scope.emailInput);
-    $state.go('play.deviceData');
+    var dataObj = {
+        typeId: "iot-phone",
+        deviceId: $scope.deviceIdInput,
+        password: "iot-phone"
+    };
+    $http.post('/createDevice', dataObj).then(function(response){
+        console.log(response.data);
+        $state.go("play.deviceData");
+    }, function(response) {
+        console.err(response.statusText);
+    });
   };
 };

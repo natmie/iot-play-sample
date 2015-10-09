@@ -109,28 +109,25 @@
 	<template>
 		<ul class='list-data'>
 			<li>
-				<h4>Shake your phone until <span class="h4-color">{{attribute}}</span> exceeds <span class="h4-color">{{attributeLimit}}</span></h4>
-      			<span hidden$="{{!triggerWarning}}" class="alert-message">Too much&nbsp;<span>{{attribute}}</span></span>
-      			<span hidden$="{{triggerWarning}}" class="alert-message ok">You're within your <span>{{attribute}}</span> limit</span>
+				<h4>Shake your phone until <span class="h4-color">{{attributeName}}</span> exceeds <span class="h4-color">{{attributeLimit}}</span> <span class="h4-color">{{attributeUnit}}</span></h4>
+      			<span hidden$="{{!triggerWarning}}" class="alert-message">Too much&nbsp;<span>{{attributeName}}</span></span>
+      			<span hidden$="{{triggerWarning}}" class="alert-message ok">You're within your <span>{{attributeName}}</span> limit</span>
 			</li>
 			<li>
 				<h4>Change the rule</h4>
 				<div class="rules-panel">
 					<span>Alert me if</span>
 
-					<span class="rules-message">{{attribute}}</span>
+					<span class="rules-message">{{attributeName}}</span>
 
 					<span>is greater than</span>
 					<div class="input-spinner-container">
-						<input type="text" is="iron-input" pattern="\d*" maxlength="2" class="short-input" bind-value="{{updateAttributeLimit}}">
+						<input type="text" is="iron-input" pattern="\d*" maxlength="2" class="short-input" bind-value="{{attributeLimit}}">
 						<div class="spinner-container">
 				      <button class="btn border-left-top" on-tap="_handleTapSum" type="button"><div class="arrow-up"></div></button>
 				      <button class="btn border-left-bottom" on-tap="_handleTapMinus" type="button"><div class="arrow-up arrow-down"></div></button>
 				    </div>
-					</div>
-					<div class="update-panel">
-						<paper-icon-button src="../../../../assets/img/play-update-icon.svg" on-tap="updateRule"></paper-icon-button>
-						<span class="update-message">Update rule</span>
+					<span>{{attributeUnit}}</span>
 					</div>
 				</div>
 			</li>

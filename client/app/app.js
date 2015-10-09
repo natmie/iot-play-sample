@@ -16,7 +16,16 @@ require('./components/play');
 
 //Define routes, views and controllers
 app.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/play');
+
+    // $urlRouterProvider.otherwise('/play');
+    // Using this other version of $urlRouterProvider.otherwise() to get rid of the
+    // infinite $digest() loop when the user lands on an unknown url (a url that would be handled by $urlRouterProvider.otherwise())
+    // Reference: https://github.com/angular-ui/ui-router/issues/600
+    $urlRouterProvider.otherwise(function($injector) {
+      var $state = $injector.get("$state");
+      $state.go("play");
+    });
+
     $stateProvider
       .state('play', {
         redirectTo: 'play.connect',

@@ -214,13 +214,13 @@
 					// Add a key to the graph
 					for (var k = 0 ; k < this.valuesSet.length; k=k+1) {
 						svg.append("svg:rect")
-								.attr("x", this.width - 90)
+								.attr("x", this.width - 120)
 								.attr("y", 0 + k * 18)
 								.attr("stroke", colors[k])
 								.attr("height", 2)
 								.attr("width", 40);
 						svg.append("svg:text")
-								.attr("x", this.width - 40)
+								.attr("x", this.width - 70)
 								.attr("y", 5 + k * 18)
 								.text(this.metadata[k].name);
 					}	
